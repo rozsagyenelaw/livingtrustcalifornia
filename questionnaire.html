@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Will - Living Trust California</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        .navbar {
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
+        
+        .progress-container {
+            margin-top: 80px;
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .progress-bar {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+        
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: -1;
+        }
+        
+        .step.active::after {
+            background: #2563eb;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .step.active .step-number {
+            background: #2563eb;
+        }
+        
+        .step.completed .step-number {
+            background: #4CAF50;
+        }
+        
+        .step-label {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .questionnaire-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .form-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+        
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+        
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .help-text {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .review-section {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .review-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .review-item:last-child {
+            border-bottom: none;
+        }
+        
+        .review-label {
+            font-weight: 500;
+            color: #6b7280;
+        }
+        
+        .review-value {
+            color: #111827;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            .form-section {
+                padding: 20px;
+            }
+            
+            .progress-steps {
+                font-size: 0.75rem;
+            }
+            
+            .step-label {
+                font-size: 0.7rem;
+            }
+            
+            .button-group {
+                flex-direction: column-reverse;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Living Trust California</a>
+            <button class="btn btn-secondary" onclick="saveProgress()">Save & Exit</button>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-steps">
+                <div class="step active" id="step1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Personal Info</div>
+                </div>
+                <div class="step" id="step2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Family</div>
+                </div>
+                <div class="step" id="step3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Beneficiaries</div>
+                </div>
+                <div class="step" id="step4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Executor</div>
+                </div>
+                <div class="step" id="step5">
+                    <div class="step-number">5</div>
+                    <div class="step-label">Review</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Questionnaire Container -->
+    <div class="questionnaire-container">
+        <!-- Section 1: Personal Information -->
+        <div class="form-section active" id="section1">
+            <h2 class="section-title">Let's start with your basic information</h2>
+            <p class="section-subtitle">This information will be used to create your legal documents.</p>
+            
+            <form id="personalForm">
+                <div class="form-group">
+                    <label for="fullName">Full Legal Name *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                    <span class="help-text">Enter your name exactly as it appears on your driver's license</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="birthDate">Date of Birth *</label>
+                    <input type="date" id="birthDate" name="birthDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Current Address *</label>
+                    <input type="text" id="address" name="address" placeholder="Street Address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="state">State *</label>
+                    <select id="state" name="state" required>
+                        <option value="">Select State</option>
+                        <option value="CA" selected>California</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="zip">ZIP Code *</label>
+                    <input type="text" id="zip" name="zip" required>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn btn-primary" onclick="nextSection(1)">Continue</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Section 2: Family Information -->
+        <div class="form-section" id="section2">
+            <h2 class="section-title">Tell us about your family</h2>
+            <p class="section-subtitle">This helps us structure your will appropriately.</p>
+            
+            <form id="familyForm">
+                <div class="form-group">
+                    <label>Marital Status *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="single" name="maritalStatus" value="single" onchange="toggleSpouseSection()">
+                            <label for="single">Single</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="married" name="maritalStatus" value="married" onchange="toggleSpouseSection()">
+                            <label for="married">Married</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="divorced" name="maritalStatus" value="divorced" onchange="toggleSpouseSection()">
+                            <label for="divorced">Divorced</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="widowed" name="maritalStatus" value="widowed" onchange="toggleSpouseSection()">
+                            <label for="widowed">Widowed</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Spouse Section (Hidden by default) -->
+                <div id="spouseSection" class="hidden">
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Spouse Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="spouseName">Spouse's Full Legal Name *</label>
+                        <input type="text" id="spouseName" name="spouseName">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="spouseBirthDate">Spouse's Date of Birth *</label>
+                        <input type="date" id="spouseBirthDate" name="spouseBirthDate">
+                    </div>
+                </div>
+                
+                <div class="form-group" style="margin-top: 2rem;">
+                    <label>Do you have children? *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="childrenYes" name="hasChildren" value="yes" onchange="toggleChildrenSection()">
+                            <label for="childrenYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="childrenNo" name="hasChildren" value="no" onchange="toggleChildrenSection()">
+                            <label for="childrenNo">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Children Section (Hidden by default) -->
+                <div id="childrenSection" class="hidden">
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Children Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="numberOfChildren">Number of Children *</label>
+                        <select id="numberOfChildren" name="numberOfChildren" onchange="generateChildrenFields()">
+                            <option value="">Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5+</option>
+                        </select>
+                    </div>
+                    
+                    <div id="childrenFields"></div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="previousSection(2)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(2)">Continue</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Section 3: Beneficiaries -->
+        <div class="form-section" id="section3">
+            <h2 class="section-title">Who will inherit your assets?</h2>
+            <p class="section-subtitle">You can divide your estate among multiple beneficiaries.</p>
+            
+            <form id="beneficiariesForm">
+                <div class="form-group">
+                    <label>Primary Beneficiary Distribution</label>
+                    <div id="primaryBeneficiaries">
+                        <!-- This will be populated based on family information -->
+                    </div>
+                </div>
+                
+                <div class="form-group" style="margin-top: 2rem;">
+                    <label>Would you like to add additional beneficiaries?</label>
+                    <button type="button" class="btn btn-secondary" onclick="addBeneficiary()">+ Add Beneficiary</button>
+                </div>
+                
+                <div id="additionalBeneficiaries"></div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="previousSection(3)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(3)">Continue</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Section 4: Executor -->
+        <div class="form-section" id="section4">
+            <h2 class="section-title">Who will manage your estate?</h2>
+            <p class="section-subtitle">Choose someone you trust to carry out your wishes.</p>
+            
+            <form id="executorForm">
+                <div class="form-group">
+                    <label for="executorName">Executor's Full Name *</label>
+                    <input type="text" id="executorName" name="executorName" required>
+                    <span class="help-text">This person will manage your estate and ensure your wishes are carried out</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="executorRelation">Relationship to You *</label>
+                    <select id="executorRelation" name="executorRelation" required>
+                        <option value="">Select Relationship</option>
+                        <option value="spouse">Spouse</option>
+                        <option value="child">Child</option>
+                        <option value="parent">Parent</option>
+                        <option value="sibling">Sibling</option>
+                        <option value="friend">Friend</option>
+                        <option value="professional">Professional (Attorney, Accountant, etc.)</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="executorPhone">Executor's Phone Number</label>
+                    <input type="tel" id="executorPhone" name="executorPhone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="alternateExecutor">Alternate Executor (Optional)</label>
+                    <input type="text" id="alternateExecutor" name="alternateExecutor">
+                    <span class="help-text">In case your primary executor is unable to serve</span>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="previousSection(4)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(4)">Continue</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Section 5: Review -->
+        <div class="form-section" id="section5">
+            <h2 class="section-title">Review your information</h2>
+            <p class="section-subtitle">Please confirm everything is correct before proceeding.</p>
+            
+            <div id="reviewContent">
+                <!-- This will be populated with all the form data -->
+            </div>
+            
+            <div class="form-group" style="margin-top: 2rem;">
+                <label>
+                    <input type="checkbox" id="confirmAccuracy" name="confirmAccuracy">
+                    I confirm that all information provided is accurate and complete
+                </label>
+            </div>
+            
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary" onclick="previousSection(5)">Back</button>
+                <button type="button" class="btn btn-primary" onclick="proceedToPayment()" id="proceedBtn" disabled>Proceed to Payment</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Store form data
+        let formData = {
+            personal: {},
+            family: {},
+            beneficiaries: {},
+            executor: {}
+        };
+
+        // Current section
+        let currentSection = 1;
+
+        // Toggle spouse section based on marital status
+        function toggleSpouseSection() {
+            const maritalStatus = document.querySelector('input[name="maritalStatus"]:checked').value;
+            const spouseSection = document.getElementById('spouseSection');
+            
+            if (maritalStatus === 'married') {
+                spouseSection.classList.remove('hidden');
+                document.getElementById('spouseName').required = true;
+                document.getElementById('spouseBirthDate').required = true;
+            } else {
+                spouseSection.classList.add('hidden');
+                document.getElementById('spouseName').required = false;
+                document.getElementById('spouseBirthDate').required = false;
+            }
+        }
+
+        // Toggle children section
+        function toggleChildrenSection() {
+            const hasChildren = document.querySelector('input[name="hasChildren"]:checked').value;
+            const childrenSection = document.getElementById('childrenSection');
+            
+            if (hasChildren === 'yes') {
+                childrenSection.classList.remove('hidden');
+            } else {
+                childrenSection.classList.add('hidden');
+            }
+        }
+
+        // Generate fields for children
+        function generateChildrenFields() {
+            const numberOfChildren = document.getElementById('numberOfChildren').value;
+            const childrenFields = document.getElementById('childrenFields');
+            childrenFields.innerHTML = '';
+            
+            for (let i = 1; i <= numberOfChildren && i <= 5; i++) {
+                const childDiv = document.createElement('div');
+                childDiv.style.marginBottom = '1.5rem';
+                childDiv.innerHTML = `
+                    <h4>Child ${i}</h4>
+                    <div class="form-group">
+                        <label for="child${i}Name">Full Name *</label>
+                        <input type="text" id="child${i}Name" name="child${i}Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="child${i}BirthDate">Date of Birth *</label>
+                        <input type="date" id="child${i}BirthDate" name="child${i}BirthDate" required>
+                    </div>
+                `;
+                childrenFields.appendChild(childDiv);
+            }
+        }
+
+        // Add beneficiary
+        let beneficiaryCount = 0;
+        function addBeneficiary() {
+            beneficiaryCount++;
+            const additionalBeneficiaries = document.getElementById('additionalBeneficiaries');
+            const beneficiaryDiv = document.createElement('div');
+            beneficiaryDiv.style.marginTop = '1.5rem';
+            beneficiaryDiv.innerHTML = `
+                <h4>Additional Beneficiary ${beneficiaryCount}</h4>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="additionalBeneficiary${beneficiaryCount}Name">
+                </div>
+                <div class="form-group">
+                    <label>Percentage of Estate</label>
+                    <input type="number" name="additionalBeneficiary${beneficiaryCount}Percentage" min="0" max="100">
+                </div>
+            `;
+            additionalBeneficiaries.appendChild(beneficiaryDiv);
+        }
+
+        // Navigation functions
+        function nextSection(current) {
+            // Validate current section
+            if (!validateSection(current)) {
+                return;
+            }
+            
+            // Save current section data
+            saveCurrentSection(current);
+            
+            // Move to next section
+            document.getElementById(`section${current}`).classList.remove('active');
+            document.getElementById(`section${current + 1}`).classList.add('active');
+            
+            // Update progress bar
+            document.getElementById(`step${current}`).classList.add('completed');
+            document.getElementById(`step${current + 1}`).classList.add('active');
+            
+            currentSection = current + 1;
+            
+            // Special handling for sections
+            if (current + 1 === 3) {
+                setupBeneficiaries();
+            } else if (current + 1 === 5) {
+                populateReview();
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        function previousSection(current) {
+            document.getElementById(`section${current}`).classList.remove('active');
+            document.getElementById(`section${current - 1}`).classList.add('active');
+            
+            document.getElementById(`step${current}`).classList.remove('active');
+            
+            currentSection = current - 1;
+            window.scrollTo(0, 0);
+        }
+
+        // Validation
+        function validateSection(section) {
+            const form = document.querySelector(`#section${section} form`);
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return false;
+            }
+            return true;
+        }
+
+        // Save section data
+        function saveCurrentSection(section) {
+            const form = document.querySelector(`#section${section} form`);
+            const data = new FormData(form);
+            
+            switch(section) {
+                case 1:
+                    formData.personal = Object.fromEntries(data);
+                    break;
+                case 2:
+                    formData.family = Object.fromEntries(data);
+                    break;
+                case 3:
+                    formData.beneficiaries = Object.fromEntries(data);
+                    break;
+                case 4:
+                    formData.executor = Object.fromEntries(data);
+                    break;
+            }
+        }
+
+        // Setup beneficiaries based on family info
+        function setupBeneficiaries() {
+            const primaryBeneficiaries = document.getElementById('primaryBeneficiaries');
+            let html = '';
+            
+            if (formData.family.maritalStatus === 'married' && formData.family.spouseName) {
+                html += `
+                    <div class="form-group">
+                        <label>${formData.family.spouseName} (Spouse)</label>
+                        <input type="number" name="spousePercentage" value="100" min="0" max="100">%
+                    </div>
+                `;
+            }
+            
+            if (formData.family.hasChildren === 'yes') {
+                html += '<p style="margin-top: 1rem;">Children will receive equal shares of any remaining estate</p>';
+            }
+            
+            primaryBeneficiaries.innerHTML = html;
+        }
+
+        // Populate review section
+        function populateReview() {
+            const reviewContent = document.getElementById('reviewContent');
+            let html = '';
+            
+            // Personal Information
+            html += '<div class="review-section"><h3>Personal Information</h3>';
+            html += `<div class="review-item"><span class="review-label">Name:</span><span class="review-value">${formData.personal.fullName || ''}</span></div>`;
+            html += `<div class="review-item"><span class="review-label">Email:</span><span class="review-value">${formData.personal.email || ''}</span></div>`;
+            html += `<div class="review-item"><span class="review-label">Address:</span><span class="review-value">${formData.personal.address || ''}, ${formData.personal.city || ''}, ${formData.personal.state || ''} ${formData.personal.zip || ''}</span></div>`;
+            html += '</div>';
+            
+            // Family Information
+            html += '<div class="review-section"><h3>Family Information</h3>';
+            html += `<div class="review-item"><span class="review-label">Marital Status:</span><span class="review-value">${formData.family.maritalStatus || ''}</span></div>`;
+            if (formData.family.spouseName) {
+                html += `<div class="review-item"><span class="review-label">Spouse:</span><span class="review-value">${formData.family.spouseName}</span></div>`;
+            }
+            html += `<div class="review-item"><span class="review-label">Children:</span><span class="review-value">${formData.family.hasChildren === 'yes' ? formData.family.numberOfChildren : 'None'}</span></div>`;
+            html += '</div>';
+            
+            // Executor
+            html += '<div class="review-section"><h3>Executor</h3>';
+            html += `<div class="review-item"><span class="review-label">Primary:</span><span class="review-value">${formData.executor.executorName || ''}</span></div>`;
+            if (formData.executor.alternateExecutor) {
+                html += `<div class="review-item"><span class="review-label">Alternate:</span><span class="review-value">${formData.executor.alternateExecutor}</span></div>`;
+            }
+            html += '</div>';
+            
+            reviewContent.innerHTML = html;
+        }
+
+        // Enable proceed button when confirmed
+        document.getElementById('confirmAccuracy').addEventListener('change', function() {
+            document.getElementById('proceedBtn').disabled = !this.checked;
+        });
+
+        // Save progress
+        function saveProgress() {
+            saveCurrentSection(currentSection);
+            localStorage.setItem('willFormData', JSON.stringify(formData));
+            localStorage.setItem('willFormSection', currentSection);
+            alert('Your progress has been saved!');
+        }
+
+        // Load saved progress
+        window.onload = function() {
+            const savedData = localStorage.getItem('willFormData');
+            const savedSection = localStorage.getItem('willFormSection');
+            
+            if (savedData) {
+                formData = JSON.parse(savedData);
+                // You can implement form population here
+            }
+        }
+
+        // Proceed to payment
+        function proceedToPayment() {
+            saveCurrentSection(5);
+            alert('Proceeding to payment... (This would integrate with Stripe)');
+            // Here you would integrate with Stripe for payment
+        }
+    </script>
+</body>
+</html>
