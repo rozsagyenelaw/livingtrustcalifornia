@@ -1,0 +1,8 @@
+{
+  "name": "livingtrust-california",
+  "version": "1.0.0",
+  "description": "Living Trust and Will Platform",
+  "scripts": {
+    "build": "echo 'No build needed for static site'"
+  }
+}
